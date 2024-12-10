@@ -1,0 +1,52 @@
+.favorite-cities-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .custom-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bg-gradient {
+    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+  }
+  
+  .weather-icon {
+    transition: transform 0.2s ease;
+  }
+  
+  .weather-icon:hover {
+    transform: scale(1.1);
+  }
+  
+  .forecast-row {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .forecast-temp {
+    font-weight: bold;
+    color: #ff6f61;
+  }
+  
+  .forecast-description {
+    color: #3a3a3a;
+  }
+  
+  .custom-btn {
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-btn:hover {
+    background-color: #dc3545;
+  }
+  
