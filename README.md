@@ -1,7 +1,3 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -35,7 +31,5 @@ A responsive Weather Application built with React, featuring a real-time weather
 
 1. Clone the repository:
    bash
-   git clone https://github.com/RahulBharodiya/Weather-Dashboard.git
+   git clone https://github.com/RahulBharodiya0/weather-dashboard.git
    cd weather-dashboard
-
-# Weather-Dashboard
