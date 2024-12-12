@@ -1,6 +1,12 @@
 import React from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
-import { WiDaySunny, WiDayCloudy, WiDayRain, WiDaySnow } from "react-icons/wi"; // Use icons for weather
+import {
+  WiDaySunny,
+  WiDayCloudy,
+  WiDayRain,
+  WiDaySnow,
+  WiFog,
+} from "react-icons/wi";
 
 const WeatherDisplay = ({ weather, unit, onRemove }) => {
   if (!weather) {
@@ -11,12 +17,22 @@ const WeatherDisplay = ({ weather, unit, onRemove }) => {
     );
   }
 
-  const getWeatherIcon = (description) => {
-    if (description.includes("cloud")) return <WiDayCloudy size={50} />;
-    if (description.includes("rain")) return <WiDayRain size={50} />;
+  const getWeatherIcon = (description, temp) => {
     if (description.includes("snow")) return <WiDaySnow size={50} />;
-    return <WiDaySunny size={50} />;
+    if (description.includes("rain") || description.includes("drizzle"))
+      return <WiDayRain size={50} />;
+    if (description.includes("cloud")) {
+      return temp <= 15 ? <WiDayCloudy size={50} /> : <WiDaySunny size={50} />;
+    }
+    if (description.includes("clear")) {
+      return temp <= 15 ? <WiDaySunny size={50} /> : <WiDaySunny size={50} />;
+    }
+    if (description.includes("fog") || description.includes("mist"))
+      return <WiFog size={50} />;
+    return <WiDaySunny size={50} />; // Default to sunny
   };
+
+  const convertTemp = (temp) => (unit === "C" ? temp : (temp * 9) / 5 + 32);
 
   return (
     <div
@@ -50,7 +66,7 @@ const WeatherDisplay = ({ weather, unit, onRemove }) => {
             className="temperature"
             style={{ fontSize: "3rem", fontWeight: "bold", color: "#FF7043" }}
           >
-            {unit === "C" ? weather.temp : (weather.temp * 9) / 5 + 32}°{unit}
+            {convertTemp(weather.temp)}°{unit}
           </div>
           <div
             className="weather-description"
@@ -59,7 +75,7 @@ const WeatherDisplay = ({ weather, unit, onRemove }) => {
             {weather.description}
           </div>
           <div className="weather-icon" style={{ marginTop: "20px" }}>
-            {getWeatherIcon(weather.description)}
+            {getWeatherIcon(weather.description, weather.temp)}
           </div>
         </Card.Body>
       </Card>
@@ -102,12 +118,17 @@ const WeatherDisplay = ({ weather, unit, onRemove }) => {
                     color: "#FF7043",
                   }}
                 >
-                  {unit === "C" ? forecast.temp : (forecast.temp * 9) / 5 + 32}°
-                  {unit}
+                  {convertTemp(forecast.temp)}°{unit}
                 </div>
                 <p style={{ fontSize: "1rem", color: "#78909C" }}>
                   {forecast.description}
                 </p>
+                <p style={{ fontSize: "1rem", color: "#78909C" }}>
+                  Wind: {forecast.windSpeed} m/s
+                </p>
+                <div className="weather-icon" style={{ marginTop: "10px" }}>
+                  {getWeatherIcon(forecast.description, forecast.temp)}
+                </div>
               </Card.Body>
             </Card>
           </Col>

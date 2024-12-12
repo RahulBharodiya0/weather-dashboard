@@ -14,6 +14,19 @@ const WeatherDashboard = () => {
   const [unit, setUnit] = useState("C");
   const [favorites, setFavorites] = useState([]);
   const [previousCity, setPreviousCity] = useState(null);
+  const handleGetForecast = async (city) => {
+    if (!city) {
+      toast.error("No city selected. Please search for a city first.");
+      return;
+    }
+    const weatherData = await getWeatherData(city, unit);
+    if (weatherData) {
+      setWeather((prev) => ({ ...prev, forecast: weatherData.forecast }));
+      toast.success(`5-Day forecast updated for ${city}.`);
+    } else {
+      toast.error("Failed to fetch forecast data. Please try again.");
+    }
+  };
 
   const handleSearch = async (city) => {
     const weatherData = await getWeatherData(city, unit);
